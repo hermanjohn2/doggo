@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-import LoginCard from '../../components/LoginCard';
+import RegisterCard from '../../components/RegisterCard';
 
 const useStyles = makeStyles({
 	root: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 	}
 });
 
-const Login = () => {
+const Register = () => {
 	const classes = useStyles();
 
 	return (
@@ -34,9 +34,9 @@ const Login = () => {
 				{'{d}'}oggo.
 			</Typography>
 
-			<LoginCard classes={classes} />
+			<RegisterCard classes={classes} />
 		</div>
 	);
 };
 
-export default Login;
+export default Register;
