@@ -9,6 +9,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 
 import store from '../../app/store';
+// import API from '../../utils/userAPI';
 
 const LoginCard = props => {
 	let history = useHistory();
@@ -21,6 +22,16 @@ const LoginCard = props => {
 		store.dispatch({ type: 'login/setId', payload: 'fakeUserId1' });
 
 		console.log('Altered State:');
+		console.log(store.getState());
+
+		let userPets = ['jimmy', 'joe'];
+
+		store.dispatch({
+			type: 'login/setUser',
+			payload: { firstName: 'Test', lastName: 'This', email: 'fakeemail@email.com', dogs: userPets }
+		});
+
+		console.log('Altered state again:');
 		console.log(store.getState());
 	};
 

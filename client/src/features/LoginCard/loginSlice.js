@@ -1,9 +1,11 @@
 const initialState = {
-	userId: '',
-	firstName: '',
-	lastName: '',
-	email: '',
-	dogs: []
+	user: {
+		userId: '',
+		firstName: '',
+		lastName: '',
+		email: '',
+		dogs: []
+	}
 };
 
 export default function filtersReducer(state = initialState, action) {
@@ -16,15 +18,10 @@ export default function filtersReducer(state = initialState, action) {
 			};
 		}
 		case 'login/setUser': {
-			return [
+			return {
 				...state,
-				{
-					firstName: action.payload.first,
-					lastName: action.payload.last,
-					email: action.payload.email,
-					dogs: action.payload.dogs
-				}
-			];
+				user: action.payload
+			};
 		}
 
 		default:

@@ -30,10 +30,12 @@ module.exports = {
 					if (result)
 						res.json({
 							_id: data._id,
+							firstName: data.firstName,
+							lastName: data.lastName,
 							email: data.email,
 							dogs: data.dogs
 						});
-					else res.status(422).json({ error: 'Invalid password' });
+					else res.status(422).json(err);
 				});
 			})
 			.catch(err => {
