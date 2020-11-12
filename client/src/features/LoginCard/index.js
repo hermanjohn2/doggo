@@ -8,11 +8,20 @@ import TextField from '@material-ui/core/TextField';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 
+import store from '../../app/store';
+
 const LoginCard = props => {
 	let history = useHistory();
 
 	const handleLogin = () => {
 		console.log('Attempting to log in...');
+		console.log('Initial State:');
+		console.log(store.getState());
+
+		store.dispatch({ type: 'login/setId', payload: 'fakeUserId1' });
+
+		console.log('Altered State:');
+		console.log(store.getState());
 	};
 
 	const registerRedirect = () => {

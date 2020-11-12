@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-import RegisterCard from '../../components/RegisterCard';
+import RegisterCard from '../../features/RegisterCard';
 
 const useStyles = makeStyles({
 	root: {
