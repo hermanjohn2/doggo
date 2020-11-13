@@ -9,30 +9,29 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 
 import store from '../../app/store';
-// import API from '../../utils/userAPI';
+import API from '../../utils/userAPI';
 
 const LoginCard = props => {
 	let history = useHistory();
 
+	let email;
+	let password;
+
 	const handleLogin = () => {
-		console.log('Attempting to log in...');
-		console.log('Initial State:');
-		console.log(store.getState());
-
-		store.dispatch({ type: 'login/setId', payload: 'fakeUserId1' });
-
-		console.log('Altered State:');
-		console.log(store.getState());
-
-		let userPets = ['jimmy', 'joe'];
-
-		store.dispatch({
-			type: 'login/setUser',
-			payload: { firstName: 'Test', lastName: 'This', email: 'fakeemail@email.com', dogs: userPets }
-		});
-
-		console.log('Altered state again:');
-		console.log(store.getState());
+		API.loginUser(email, password)
+			.then(res => {
+				store.dispatch({
+					type: 'login/setUser',
+					payload: {
+						userId: res.data._id,
+						firstName: res.data.firstName,
+						lastName: res.data.lastName,
+						dogs: res.data.dogs
+					}
+				});
+			})
+			.then(() => history.push('/home'))
+			.catch(err => console.log(err));
 	};
 
 	const registerRedirect = () => {
@@ -44,11 +43,19 @@ const LoginCard = props => {
 		<div>
 			<Card>
 				<CardContent>
-					<TextField className={props.classes.input} label="Email" variant="outlined" />
+					<TextField
+						className={props.classes.input}
+						label="Email"
+						variant="outlined"
+						onChange={e => (email = e.target.value)}
+						value={email}
+					/>
 					<TextField
 						className={props.classes.input}
 						label="Password"
 						variant="outlined"
+						onChange={e => (password = e.target.value)}
+						value={password}
 					/>
 				</CardContent>
 				<CardActions>

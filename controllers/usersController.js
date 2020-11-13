@@ -32,7 +32,6 @@ module.exports = {
 							_id: data._id,
 							firstName: data.firstName,
 							lastName: data.lastName,
-							email: data.email,
 							dogs: data.dogs
 						});
 					else res.status(422).json(err);
