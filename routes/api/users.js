@@ -10,9 +10,6 @@ router.route('/:id').get(usersController.findById).delete(usersController.remove
 // ROUTE: /api/users/register
 router.route('/register').post(usersController.create);
 
-// ROUTE: /api/users/login
-router.route('/login').post(usersController.login);
-
 // ROUTE: /api/users/update-password
 router.route('/update-password').put(usersController.updatePassword);
 

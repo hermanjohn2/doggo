@@ -23,24 +23,6 @@ module.exports = {
 			.then(response => res.json(response))
 			.catch(err => res.status(422).json(err));
 	},
-	login: (req, res) => {
-		db.User.findOne({ email: req.body.email })
-			.then(data => {
-				data.comparePassword(req.body.password, (err, result) => {
-					if (result)
-						res.json({
-							_id: data._id,
-							firstName: data.firstName,
-							lastName: data.lastName,
-							dogs: data.dogs
-						});
-					else res.status(422).json(err);
-				});
-			})
-			.catch(err => {
-				res.status(422).json(err);
-			});
-	},
 	updatePassword: (req, res) => {
 		const newPassword = req.body.password;
 		const hashedPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10), null);

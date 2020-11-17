@@ -10,9 +10,12 @@ export default {
 		});
 	},
 	loginUser: (email, password) => {
-		return axios.post('/api/users/login', {
+		return axios.post('/api/auth/login', {
 			email: email,
 			password: password
 		});
+	},
+	getCurrentUser: () => {
+		return axios.get('/api/auth/login');
 	}
 };
