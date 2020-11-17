@@ -8,9 +8,9 @@ import Home from './pages/Home';
 const App = () => {
 	return (
 		<Router>
-			<Route exact path="/" component={Login} />
+			<Route exact path="/" component={Home} />
 			<Route exact path="/register" component={Register} />
-			<Route exact path="/home" component={Home} />
+			<Route exact path="/login" component={Login} />
 		</Router>
 	);
 };

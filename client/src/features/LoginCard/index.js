@@ -14,6 +14,8 @@ import API from '../../utils/userAPI';
 const LoginCard = props => {
 	let history = useHistory();
 
+	// Setting as variables so user input is not stored in state or storage
+	// Hoping this enables more security
 	let email;
 	let password;
 
@@ -30,7 +32,7 @@ const LoginCard = props => {
 					}
 				});
 			})
-			.then(() => history.push('/home'))
+			.then(() => history.push('/'))
 			.catch(err => console.log(err));
 	};
 

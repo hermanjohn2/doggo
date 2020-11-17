@@ -46,7 +46,7 @@ const RegisterCard = props => {
 
 	const loginRedirect = () => {
 		// Navigates to the Login page
-		history.push('/');
+		history.push('/login');
 	};
 
 	return (

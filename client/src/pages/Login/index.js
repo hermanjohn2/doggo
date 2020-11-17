@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
 import LoginCard from '../../features/LoginCard';

@@ -15,7 +15,7 @@ export default {
 			password: password
 		});
 	},
-	getCurrentUser: () => {
+	getSessionUserId: () => {
 		return axios.get('/api/auth/login');
 	},
 	logoutUser: () => {
