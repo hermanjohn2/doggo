@@ -15,8 +15,13 @@ module.exports = {
 		})(req, res, next);
 	},
 	getCurrentUser: (req, res) => {
-		if (!req.session) res.status(400).json({ errors: 'Error With Getting Current User' });
+		if (!req.session) res.status(400).json({ errors: 'Error Getting Current User' });
 
 		return res.status(200).json({ userId: req.session.passport.user });
+	},
+	logout: (req, res) => {
+		req.logout();
+
+		return res.status(200).json({ status: 'User logged out.' });
 	}
 };
