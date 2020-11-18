@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import Jumbotron from '../Jumbotron';
+
 import API from '../../utils/userAPI';
 import store from '../../app/store';
 
-const Home = () => {
-	let userData = store.getState().login.user;
+const Dashboard = () => {
 	let history = useHistory();
-	let userId;
-
-	console.log(userData);
 
 	useEffect(() => {
 		verifyLoggedIn();
@@ -18,15 +16,24 @@ const Home = () => {
 	const verifyLoggedIn = () => {
 		API.getSessionUserId()
 			.then(result => {
+				// If the user does not have a current session...
 				if (!result.data.userId) history.push('/login');
-
-				userId = result.data.userId;
-				console.log(userId);
+				else setUserData(result.data.userId);
 			})
 			.catch(err => console.log(err));
 	};
 
-	// const setUserData = () => {};
+	const setUserData = id => {
+		API.getUser(id)
+			.then(response => {
+				store.dispatch({
+					type: 'login/setUser',
+					payload: response.data
+				});
+			})
+			.then(() => console.log(store.getState().login.user))
+			.catch(err => console.log(err));
+	};
 
 	const handleLogout = () => {
 		API.logoutUser()
@@ -40,10 +47,9 @@ const Home = () => {
 	return (
 		<div>
 			<button onClick={handleLogout}>Logout</button>
-			<h1>doggo</h1>
-			<h2>Welcome, {userData.firstName}</h2>
+			<Jumbotron />
 		</div>
 	);
 };
 
-export default Home;
+export default Dashboard;

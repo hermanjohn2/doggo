@@ -14,10 +14,10 @@ module.exports = {
 			});
 		})(req, res, next);
 	},
-	getCurrentUser: (req, res) => {
-		if (!req.session) res.status(400).json({ errors: 'Error Getting Current User' });
-
-		return res.status(200).json({ userId: req.session.passport.user });
+	getSessionUserId: (req, res) => {
+		if (!req.session.passport) {
+			res.status(200).json({ status: 'No current sessions.' });
+		} else res.status(200).json({ userId: req.session.passport.user });
 	},
 	logout: (req, res) => {
 		req.logout();

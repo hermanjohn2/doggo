@@ -16,9 +16,12 @@ export default {
 		});
 	},
 	getSessionUserId: () => {
-		return axios.get('/api/auth/login');
+		return axios.get('/api/auth/session');
 	},
 	logoutUser: () => {
 		return axios.post('/api/auth/logout');
+	},
+	getUser: id => {
+		return axios.get(`/api/users/${id}`);
 	}
 };

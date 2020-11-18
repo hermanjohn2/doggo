@@ -9,7 +9,14 @@ module.exports = {
 	},
 	findById: (req, res) => {
 		db.User.findById(req.params.id)
-			.then(data => res.json(data))
+			.then(data =>
+				res.json({
+					id: data._id,
+					firstName: data.firstName,
+					lastName: data.lastName,
+					dogs: data.dogs
+				})
+			)
 			.catch(err => res.status(422).json(err));
 	},
 	create: (req, res) => {
