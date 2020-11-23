@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser, setUser } from '../LoginCard/loginSlice';
+import { useDispatch } from 'react-redux';
 
 import Jumbotron from '../Jumbotron';
 
 import API from '../../utils/userAPI';
-import store from '../../app/store';
 
 const Dashboard = () => {
-	let history = useHistory();
+	const user = useSelector(selectUser);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		verifyLoggedIn();
@@ -26,12 +30,15 @@ const Dashboard = () => {
 	const setUserData = id => {
 		API.getUser(id)
 			.then(response => {
-				store.dispatch({
-					type: 'login/setUser',
-					payload: response.data
-				});
+				dispatch(
+					setUser({
+						id: response.data.id,
+						firstName: response.data.firstName,
+						lastName: response.data.lastName,
+						dogs: response.data.dogs
+					})
+				);
 			})
-			.then(() => console.log(store.getState().login.user))
 			.catch(err => console.log(err));
 	};
 
@@ -48,6 +55,7 @@ const Dashboard = () => {
 		<div>
 			<button onClick={handleLogout}>Logout</button>
 			<Jumbotron />
+			<h2>{user.loggedIn.firstName}</h2>
 		</div>
 	);
 };

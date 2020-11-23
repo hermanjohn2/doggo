@@ -1,6 +1,8 @@
-import { createStore } from 'redux';
-import rootReducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import loginReducer from '../features/LoginCard/loginSlice';
 
-const store = createStore(rootReducer);
-
-export default store;
+export default configureStore({
+	reducer: {
+		loggedIn: loginReducer
+	}
+});

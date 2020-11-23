@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from './loginSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,11 +10,11 @@ import TextField from '@material-ui/core/TextField';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 
-import store from '../../app/store';
 import API from '../../utils/userAPI';
 
 const LoginCard = props => {
-	let history = useHistory();
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	// Setting as variables so user input is not stored in state or storage
 	// Hoping this enables more security
@@ -22,17 +24,18 @@ const LoginCard = props => {
 	const handleLogin = () => {
 		API.loginUser(email, password)
 			.then(res => {
-				store.dispatch({
-					type: 'login/setUser',
-					payload: {
-						userId: res.data._id,
+				dispatch(
+					setUser({
+						id: res.data._id,
 						firstName: res.data.firstName,
 						lastName: res.data.lastName,
 						dogs: res.data.dogs
-					}
-				});
+					})
+				);
 			})
-			.then(() => history.push('/'))
+			.then(() => {
+				history.push('/');
+			})
 			.catch(err => console.log(err));
 	};
 
